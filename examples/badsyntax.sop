@@ -1,0 +1,21 @@
+filter {
+  json {
+    source => "message"
+    array_function => "split_columns"
+  }
+
+  grok {
+    match => {
+      "timestamp" = "%{TIMESTAMP_ISO8601:EventTime}"
+    }
+
+    on_error => "time_stamp_failure"
+  }
+
+  if [EventTime] != "" {
+    date {
+      match => ["EventTime", "ISO8601"]
+      target => "event.idm.read_only_udm.metadata.collected_timestamp"
+    }
+  }
+}

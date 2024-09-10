@@ -1,0 +1,42 @@
+=============================================
+Grok
+=============================================
+
+grok {
+  match => {
+    "message" => "<grok pattern>"
+  }
+}
+
+----
+
+(parser
+  (block
+    (identifier)
+    (function
+      (identifier)
+      (key_value_pair
+        (string)
+        (string)))))
+
+
+=============================================
+Convert
+=============================================
+
+mutate {
+  convert => {
+    "jsonPayload.packets_sent" => "uinteger"
+  }
+}
+
+----
+
+(parser
+  (block
+    (identifier)
+    (function
+      (identifier)
+      (key_value_pair
+        (string)
+        (string)))))

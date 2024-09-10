@@ -1,0 +1,24 @@
+filter {
+  # parse the message into individual variables, identified as column1, column2, column3, etc.
+  csv {
+    source => "message"
+  }
+
+
+  # assign each value to a token
+  mutate {
+    replace => {
+      "resource_id" => "%{column1}"
+      "principal_company_name" => "%{column3}"
+      "location" => "%{column4}"
+      "transaction_amount" => "%{column6}"
+      "status" => "%{column9}"
+      "meta_description" => "%{column11}"
+      "target_userid" => "%{column24}"
+      "target_company_name" => "%{column13}"
+      "principal_userid" => "%{column15}"
+      "date" => "%{column16}"
+      "time" => "%{column17}"
+    }
+  }
+}

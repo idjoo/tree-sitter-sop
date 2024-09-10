@@ -1,0 +1,113 @@
+=============================================
+If statements
+=============================================
+
+filter {
+  if [protocol] == "tcp" or [protocol] == "udp" or [protocol] == "icmp" {
+    mutate {
+      uppercase => [ "protocol" ]
+    }
+  }
+}
+
+----
+
+(parser
+  (block
+    (identifier)
+    (if_statement
+      (expression
+        (identifier)
+        (operator)
+        (string)
+        (expression
+          (identifier)
+          (operator)
+          (string)
+          (expression
+            (identifier)
+            (operator)
+            (string))))
+      (statement
+        (block
+          (identifier)
+          (function
+            (identifier)
+            (array
+              (string))))))))
+
+=============================================
+If/else if/else statements
+=============================================
+
+filter {
+  if [action] == "drop" or [action] == "deny" or [action] == "drop ICMP" {
+    mutate {
+      replace => {
+      "event.idm.read_only_udm.security_result.action" => "BLOCK"
+      }
+    }
+  } else if [action] == "allow" {
+    mutate {
+      replace => {
+        "event.idm.read_only_udm.security_result.action" => "ALLOW"
+      }
+    }
+  } else {
+    mutate {
+      replace => {
+        "event.idm.read_only_udm.security_result.action" => "UNKNOWN_ACTION"
+      }
+    }
+  }
+}
+
+----
+
+(parser
+  (block
+    (identifier)
+    (if_statement
+      (expression
+        (identifier)
+        (operator)
+        (string)
+        (expression
+          (identifier)
+          (operator)
+          (string)
+          (expression
+            (identifier)
+            (operator)
+            (string))))
+      (statement
+        (block
+          (identifier)
+          (function
+            (identifier)
+            (key_value_pair
+              (string)
+              (string)))))
+      (else_clause
+        (if_statement
+          (expression
+            (identifier)
+            (operator)
+            (string))
+          (statement
+            (block
+              (identifier)
+              (function
+                (identifier)
+                (key_value_pair
+                  (string)
+                  (string)))))
+          (else_clause
+            (statement
+              (block
+                (identifier)
+                (function
+                  (identifier)
+                  (key_value_pair
+                    (string)
+                    (string)))))))))))
