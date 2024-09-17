@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tree-sitter-sop"
-description = "Sop grammar for tree-sitter"
-version = "0.0.1"
-keywords = ["incremental", "parsing", "tree-sitter", "sop"]
+description = "Google SecOps Parser grammar for tree-sitter"
+version = "0.1.0"
+keywords = ["incremental", "parsing", "tree-sitter", "google", "secops", "google-secops"]
 classifiers = [
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
@@ -19,7 +19,7 @@ license.text = "MIT"
 readme = "README.md"
 
 [project.urls]
-Homepage = "https://github.com/tree-sitter/tree-sitter-sop"
+Homepage = "https://github.com/idjoo/tree-sitter-sop"
 
 [project.optional-dependencies]
 core = ["tree-sitter~=0.21"]
